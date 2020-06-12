@@ -14,10 +14,11 @@ export class CultureSystemService {
                 mainWaterSourceData:userData.mainWaterSourceData,
                 cultureSystemData:this.mapKeyValue(message.Body)
             }
-            this.userSessionService.userSessionManagement(number, data)
-            return `Thanks, Please Type # for again entering new data`
+            await this.userSessionService.userSessionManagement(number, data)
+            return `Thanks For Your Information
+                    \nPlease Type OK for your data`
         }
-    }
+}
     mapKeyValue(type:any){
         let regex = /^[1-4](,[1-4])*$/
         let message = type.split(",")

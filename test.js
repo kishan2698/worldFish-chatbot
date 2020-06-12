@@ -1,2 +1,8 @@
-let a = '1,2,3,4'
-console.log(a.split(','))
+function Person(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+  
+  var me = new Person("John", "Smith");
+  
+  console.table(me);

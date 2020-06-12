@@ -36,9 +36,9 @@ export class ReporterDetailsService {
             }
             this.userSessionService.userSessionManagement(number, data)
             return `Please Share Water Type:
-                    \n1)Sea Water
-                    \n2)Fresh Water
-                    \n3)Brackish Water`
+                    \nPlease Type 1 for Sea Water
+                    \nPlease Type 2 for Fresh Water
+                    \nPlease Type 3 for Brackish Water`
         }
     }
 }

@@ -16,7 +16,7 @@ export class MainWaterSourceService {
             }
             this.userSessionService.userSessionManagement(number, data)
             return `Description of culture system:
-                    \n\nPlease type the options by giving comma separated(eg:1,2,3,4):
+                    \nPlease type the options by giving comma separated(eg:1,2,3,4):
                     \n1)Pond
                     \n2)Tank
                     \n3)Cage

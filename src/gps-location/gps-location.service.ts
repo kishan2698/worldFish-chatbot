@@ -22,7 +22,7 @@ export class GpsLocationService {
                 else{
                     let locData:any = {
                         locationChoice:userData.locationChoice,
-                        locationData:[{latitude:message.Latitude, longitude:message.Longitude}],
+                        locationData:{latitude:message.Latitude, longitude:message.Longitude},
                         reporterName:null
                     }
                     this.userSessionService.userSessionManagement(number, locData)

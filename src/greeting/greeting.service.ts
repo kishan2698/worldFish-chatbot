@@ -56,6 +56,40 @@ export class GreetingService {
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                     res.end(twiml.toString());
                 }
+                else{
+                    if(userData.locationData.latitude){
+                    twiml.message("*_USER-DATA_*: "
+                                 + "\n_1)GPS-LOCATION-DATA_--> "
+                                 + "\n*LATITUDE*: "+ JSON.parse(JSON.stringify(userData.locationData.latitude))
+                                 + "\n*LONGITUDE*: "+ JSON.parse(JSON.stringify(userData.locationData.longitude)) 
+                                 + "\n_2)DETAILS-OF-REPORTER_--> "
+                                 + "\n*REPORTER-NAME*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterName))
+                                 + "\n*REPORTER-MOBILE NUMBER*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterMobile))
+                                 + "\n*REPORTER-EMAIL*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterEmail))
+                                 + "\n_3)WATER-TYPE_--> "+ userData.waterTypeData + "\n_MAIN-WATER-SOURCE_--> "+ userData.mainWaterSourceData
+                                 + "\n_4)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + ".")
+                    twiml.message("Please type # to restart again ")
+                    res.writeHead(200, {'Content-Type': 'text/xml'});
+                    res.end(twiml.toString());
+                    }
+                    else{
+                        twiml.message("*_USER-DATA_*: "
+                                 + "\n_1)GPS-LOCATION-DATA_--> "
+                                 + "\n*VILLAGE-NAME*: "+ JSON.parse(JSON.stringify(userData.locationData.villageName))
+                                 + "\n*DISTRICT-NAME*: "+ JSON.parse(JSON.stringify(userData.locationData.districtName))
+                                 + "\n*STATE-NAME*: "+ JSON.parse(JSON.stringify(userData.locationData.stateName))
+                                 + "\n*COUNTRY-NAME*: "+ JSON.parse(JSON.stringify(userData.locationData.countryName)) 
+                                 + "\n_2)DETAILS-OF-REPORTER_--> "
+                                 + "\n*REPORTER-NAME*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterName))
+                                 + "\n*REPORTER-MOBILE NUMBER*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterMobile))
+                                 + "\n*REPORTER-EMAIL*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterEmail))
+                                 + "\n_3)WATER-TYPE_--> "+ userData.waterTypeData + "\n_MAIN-WATER-SOURCE_--> "+ userData.mainWaterSourceData
+                                 + "\n_4)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + ".")
+                    twiml.message("Please type # to restart again")
+                    res.writeHead(200, {'Content-Type': 'text/xml'});
+                    res.end(twiml.toString());
+                    }
+                }
             }
         }
         else
@@ -71,7 +105,7 @@ export class GreetingService {
             this.userSessionService.userSessionCreate(whatsAppNumber, defaultData)
             twiml.message("WELCOME TO WORLDFISH")
             twiml.message("What Would you like to do?")
-            twiml.message(`1)Please Provide Gps Location by selecting any one method :
+            twiml.message(`Please Provide Gps Location by selecting any one method :
                           \n1)Share your Whatsapp Current Location directly
                           \n2)Manual Entry`)
             res.writeHead(200, {'Content-Type': 'text/xml'});
