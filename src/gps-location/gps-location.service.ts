@@ -38,7 +38,7 @@ export class GpsLocationService {
                         villageName:message.Body
                     }
                     this.userSessionService.userSessionManagement(number, locData)
-                    return `Please Enter Your DistrictName`
+                    return `Please Enter Your District Name`
                 }
                 else{
                     let locData:any = {
@@ -47,7 +47,7 @@ export class GpsLocationService {
                         isVisited:true
                     }
                     this.userSessionService.userSessionManagement(number, locData)
-                    return `Please Enter Your VillageName`
+                    return `Please Enter Your Village Name`
                 }
             }
             else if(!userData.districtName){
@@ -59,7 +59,7 @@ export class GpsLocationService {
                         stateName:null
                     }
                     this.userSessionService.userSessionManagement(number, locData)
-                    return `Please Enter Your StateName`
+                    return `Please Enter Your State Name`
             }
             else if(!userData.stateName){
                 let locData:any = {
@@ -71,7 +71,7 @@ export class GpsLocationService {
                     countryName:null
                 }
                 this.userSessionService.userSessionManagement(number, locData)
-                return `Please Enter Your CountryName`
+                return `Please Enter Your Country Name`
             }
             else if(!userData.countryName){
                 let locData:any = {
@@ -79,7 +79,7 @@ export class GpsLocationService {
                     locationData:{villageName:userData.villageName, districtName:userData.districtName, stateName:userData.stateName, countryName:message.Body}
                 }
                 this.userSessionService.userSessionManagement(number, locData)
-                return `2)Details Of Reporter:
+                return `Details Of Reporter:
                         \nPlease Enter Your Name`
             }
             default:

@@ -66,8 +66,9 @@ export class GreetingService {
                                  + "\n*REPORTER-NAME*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterName))
                                  + "\n*REPORTER-MOBILE NUMBER*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterMobile))
                                  + "\n*REPORTER-EMAIL*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterEmail))
-                                 + "\n_3)WATER-TYPE_--> "+ userData.waterTypeData + "\n_MAIN-WATER-SOURCE_--> "+ userData.mainWaterSourceData
-                                 + "\n_4)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + ".")
+                                 + "\n_3)WATER-TYPE_--> "+ userData.waterTypeData 
+                                 + "\n_4)MAIN-WATER-SOURCE_--> "+ userData.mainWaterSourceData
+                                 + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + ".")
                     twiml.message("Please type # to restart again ")
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                     res.end(twiml.toString());
@@ -83,8 +84,9 @@ export class GreetingService {
                                  + "\n*REPORTER-NAME*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterName))
                                  + "\n*REPORTER-MOBILE NUMBER*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterMobile))
                                  + "\n*REPORTER-EMAIL*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterEmail))
-                                 + "\n_3)WATER-TYPE_--> "+ userData.waterTypeData + "\n_MAIN-WATER-SOURCE_--> "+ userData.mainWaterSourceData
-                                 + "\n_4)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + ".")
+                                 + "\n_3)WATER-TYPE_--> "+ userData.waterTypeData 
+                                 + "\n_4)MAIN-WATER-SOURCE_--> "+ userData.mainWaterSourceData
+                                 + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + ".")
                     twiml.message("Please type # to restart again")
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                     res.end(twiml.toString());
