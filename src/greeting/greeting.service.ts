@@ -27,7 +27,7 @@ export class GreetingService {
             else{
                 let userData = JSON.parse(fs.readFileSync(`${whatsAppNumber}.json`, 'utf8'));
                 if(!userData.locationData){
-                    let resultLoc = await this.locationService.locationManagement(whatsAppNumber, userData, message)
+                    let resultLoc = await this.locationService.locationManagement(whatsAppNumber, userData, message )
                     twiml.message(resultLoc)
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                     res.end(twiml.toString());
