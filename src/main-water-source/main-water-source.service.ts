@@ -5,8 +5,10 @@ import { UserSessionService } from 'src/user-session/user-session.service';
 export class MainWaterSourceService {
     constructor(private readonly userSessionService:UserSessionService){}
     async mainWaterSourceManagement(number:string, message:any, userData:any):Promise<any>{
-        if(!userData.mainWaterSourceData){
-            let data:any = {
+        let regex = /^[1-6](,[1-6])*$/
+        if(regex.test(message.Body)){
+            if(!userData.mainWaterSourceData){
+                let data:any = {
                 locationChoice:userData.locationChoice,
                 locationData:userData.locationData,
                 reporterData:userData.reporterData,
@@ -23,8 +25,11 @@ export class MainWaterSourceService {
                     \n4)Raceway`
         }
     }
+    else{
+        return `Please type options by comma separated`
+    }
+    }
     mapKeyValue(type:any){
-        let regex = /^[1-6](,[1-6])*$/
         let message = type.split(",")
         let result = []
         let mainWaterSource:object = {
@@ -35,14 +40,9 @@ export class MainWaterSourceService {
             '5':'Surrounding seawater or brackish water',
             '6':'Rain water'
         }
-        if(regex.test(type)){
             message.forEach(element => {
                 result.push(mainWaterSource[element])
             });
             return result
-        }
-        else{
-            return `Please Enter Valid Options as given in eg`
-        }
     }
 }

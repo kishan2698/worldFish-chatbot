@@ -84,7 +84,7 @@ export class GpsLocationService {
             }
             default:
                 this.userSessionService.contactSessionManagement(number, null, null)
-                return `PLEASE SELECT ANY ONE OPTION`
+                return `PLEASE TYPE ANYTHING `
         }
     }
 }

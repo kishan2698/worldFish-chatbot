@@ -30,7 +30,6 @@ export class UserSessionService {
         fs.unlink(`${number}.json`, function (err: any) {
             if (err) throw err;
             console.log('File deleted!');
-        })
         const resData:object = {
             locationChoice:preData,
             locationData:latData
@@ -39,6 +38,7 @@ export class UserSessionService {
             if (err) throw err;
             console.log('Saved!');
             });
+        })
     }
     async fsPromiseManagement(contact:string, data:object):Promise<any>{
         await asyncFs.writeFile(`${contact}.json`, JSON.stringify(data), 'utf8');

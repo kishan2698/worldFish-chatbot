@@ -26,7 +26,7 @@ export class WaterTypeService {
                             \n6)Rain Water`
             default:
                 this.userSessionService.contactSessionManagement(number, null, null)
-                return `PLEASE SELECT ANY ONE OPTION`
+                return `PLEASE TYPE 1,2 or 3`
         }
     }
     mapValue(type:any){
