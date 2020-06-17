@@ -41,6 +41,6 @@ export class UserSessionService {
         })
     }
     async fsPromiseManagement(contact:string, data:object):Promise<any>{
-        await asyncFs.writeFile(`${contact}.json`, JSON.stringify(data), 'utf8');
+        await asyncFs.writeFile(`${contact}.json`, JSON.stringify(data), 'utf8') ;
     }
 }
