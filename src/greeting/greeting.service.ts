@@ -102,7 +102,7 @@ export class GreetingService {
                 reporterData:null,
                 waterTypeData:null,
                 mainWaterSourceData:null,
-                cultureSystemData:null
+                cultureSystemData:null,
             }
             this.userSessionService.userSessionCreate(whatsAppNumber, defaultData)
             twiml.message("WELCOME TO WORLDFISH")
