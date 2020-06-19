@@ -6,6 +6,7 @@ import { ReporterDetailsService } from 'src/reporter-details/reporter-details.se
 import { WaterTypeService } from 'src/water-type/water-type.service';
 import { MainWaterSourceService } from 'src/main-water-source/main-water-source.service';
 import { CultureSystemService } from 'src/culture-system/culture-system.service';
+import { ClinicalSignChoiceService } from 'src/clinical-sign-choice/clinical-sign-choice.service';
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 @Injectable()
@@ -15,7 +16,8 @@ export class GreetingService {
                 private readonly reporterService: ReporterDetailsService,
                 private readonly waterTypeService: WaterTypeService,
                 private readonly mainWaterTypeService: MainWaterSourceService,
-                private readonly cultureSystemService:CultureSystemService){}
+                private readonly cultureSystemService:CultureSystemService,
+                private readonly clinicSignSystemService:ClinicalSignChoiceService){}
     async greeting(req:any, res:any){
         const whatsAppNumber = req.body.From.split("+")[1]
         let message = req.body
@@ -53,6 +55,13 @@ export class GreetingService {
                 else if(!userData.cultureSystemData){
                     let resultCultureSystem = await this.cultureSystemService.cultureSystemManagement(whatsAppNumber, message,userData)
                     twiml.message(resultCultureSystem)
+                    twiml.message().media('https://api.twilio.com/2010-04-01/Accounts/AC01b5311740cfa96b328bbed8b727b387/Messages/MM92a96626d9b59d441224b989a28e7d1d/Media/ME658c3193e39fb5aee4947ca968ec5f57')
+                    res.writeHead(200, {'Content-Type': 'text/xml'});
+                    res.end(twiml.toString());
+                }
+                else if(!userData.clinicalSignChoice){
+                    let clinicSignSystem = await this.clinicSignSystemService.clinicalSignManagement(whatsAppNumber, message, userData)
+                    twiml.message(clinicSignSystem)
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                     res.end(twiml.toString());
                 }
@@ -103,6 +112,7 @@ export class GreetingService {
                 waterTypeData:null,
                 mainWaterSourceData:null,
                 cultureSystemData:null,
+                clinicalSignChoice:null
             }
             this.userSessionService.userSessionCreate(whatsAppNumber, defaultData)
             twiml.message("WELCOME TO WORLDFISH")
