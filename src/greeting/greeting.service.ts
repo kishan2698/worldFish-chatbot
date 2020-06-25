@@ -7,7 +7,9 @@ import { WaterTypeService } from 'src/water-type/water-type.service';
 import { MainWaterSourceService } from 'src/main-water-source/main-water-source.service';
 import { CultureSystemService } from 'src/culture-system/culture-system.service';
 import { ClinicalSignChoiceService } from 'src/clinical-sign-choice/clinical-sign-choice.service';
+import { SwimmingBehaviourService } from 'src/swimming-behaviour/swimming-behaviour.service';
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
+
 
 @Injectable()
 export class GreetingService {
@@ -17,7 +19,8 @@ export class GreetingService {
                 private readonly waterTypeService: WaterTypeService,
                 private readonly mainWaterTypeService: MainWaterSourceService,
                 private readonly cultureSystemService:CultureSystemService,
-                private readonly clinicSignSystemService:ClinicalSignChoiceService){}
+                private readonly clinicSignSystemService:ClinicalSignChoiceService,
+                private readonly swimmingBehaviourService: SwimmingBehaviourService){}
     async greeting(req:any, res:any){
         const whatsAppNumber = req.body.From.split("+")[1]
         let message = req.body
@@ -53,15 +56,18 @@ export class GreetingService {
                     res.end(twiml.toString());
                 }
                 else if(!userData.cultureSystemData){
-                    let resultCultureSystem = await this.cultureSystemService.cultureSystemManagement(whatsAppNumber, message,userData)
-                    twiml.message(resultCultureSystem)
-                    twiml.message().media('https://api.twilio.com/2010-04-01/Accounts/AC01b5311740cfa96b328bbed8b727b387/Messages/MM92a96626d9b59d441224b989a28e7d1d/Media/ME658c3193e39fb5aee4947ca968ec5f57')
+                    await this.cultureSystemService.cultureSystemManagement(whatsAppNumber, message,userData, twiml)
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                     res.end(twiml.toString());
                 }
-                else if(!userData.clinicalSignChoice){
-                    let clinicSignSystem = await this.clinicSignSystemService.clinicalSignManagement(whatsAppNumber, message, userData)
-                    twiml.message(clinicSignSystem)
+                else if(!userData.clinicalSignData){
+                    await this.clinicSignSystemService.clinicalSignManagement(whatsAppNumber, message, userData, twiml)
+                    res.writeHead(200, {'Content-Type': 'text/xml'});
+                    res.end(twiml.toString());
+                }
+                else if(!userData.swimmingChoice){
+                    let swimmingService = await this.swimmingBehaviourService.swimmingBehaviourManagement(whatsAppNumber, message, userData)
+                    twiml.message(swimmingService)
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                     res.end(twiml.toString());
                 }
@@ -77,7 +83,9 @@ export class GreetingService {
                                  + "\n*REPORTER-EMAIL*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterEmail))
                                  + "\n_3)WATER-TYPE_--> "+ userData.waterTypeData 
                                  + "\n_4)MAIN-WATER-SOURCE_--> "+ userData.mainWaterSourceData
-                                 + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + ".")
+                                 + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + "."
+                                 + "\n_6)CLINICAL-SIGN_--> " + userData.clinicalSignData + "."
+                                 + "\n_7)SWIMMING-BEHAVIOUR-CHOICE_--> " + userData.swimmingChoice + "." )
                     twiml.message("Please type # to restart again ")
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                     res.end(twiml.toString());
@@ -95,7 +103,9 @@ export class GreetingService {
                                  + "\n*REPORTER-EMAIL*: "+ JSON.parse(JSON.stringify(userData.reporterData.reporterEmail))
                                  + "\n_3)WATER-TYPE_--> "+ userData.waterTypeData 
                                  + "\n_4)MAIN-WATER-SOURCE_--> "+ userData.mainWaterSourceData
-                                 + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + ".")
+                                 + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + "."
+                                 + "\n_6)CLINICAL-SIGN_--> " + userData.clinicalSignData + "."
+                                 + "\n_7)SWIMMING-BEHAVIOUR-CHOICE_--> " + userData.swimmingChoice + "." )
                     twiml.message("Please type # to restart again")
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                     res.end(twiml.toString());
@@ -112,7 +122,8 @@ export class GreetingService {
                 waterTypeData:null,
                 mainWaterSourceData:null,
                 cultureSystemData:null,
-                clinicalSignChoice:null
+                clinicalSignData:null,
+                swimmingChoice: null
             }
             this.userSessionService.userSessionCreate(whatsAppNumber, defaultData)
             twiml.message("WELCOME TO WORLDFISH")

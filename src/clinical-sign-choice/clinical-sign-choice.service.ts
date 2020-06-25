@@ -4,8 +4,8 @@ import { UserSessionService } from 'src/user-session/user-session.service';
 @Injectable()
 export class ClinicalSignChoiceService {
     constructor(private readonly userSessionService:UserSessionService){}
-    async clinicalSignManagement(number:string, message:any,userData:any):Promise<String>{
-        let regex = /^[1-12](,[1-12])*$/
+    async clinicalSignManagement(number:string, message:any,userData:any, twiml:any){
+        let regex = /[1-12]+(,[1-12]+)+/
         if(regex.test(message.Body)){
             if(!userData.clinicalSignData){
                 let data:any = {
@@ -15,15 +15,19 @@ export class ClinicalSignChoiceService {
                     waterTypeData: userData.waterTypeData,
                     mainWaterSourceData:userData.mainWaterSourceData,
                     cultureSystemData:userData.cultureSystemData,
-                    clinicalSignData:this.mapKeyValue(message.Body)
+                    clinicalSignData:this.mapKeyValue(message.Body),
+                    swimmingChoice:null
                 }
                 await this.userSessionService.userSessionManagement(number, data)
-                return `Swimming behavior: 
-                        \nDo your fish show the following behavior (shown in video below, please watch and type options)?`
+                twiml.message(`Swimming behavior: 
+                        \nDo your fish show the following behavior (shown in video below, please watch and type options)?
+                        \n Please type 1 for yes
+                        \n Please type 2 for no`)
+                twiml.message().media('https://api.twilio.com/2010-04-01/Accounts/AC01b5311740cfa96b328bbed8b727b387/Messages/MMe0fb12eea3b6f62733b3d676032dfb68/Media/ME1b6277016d87cca275ca078d7c66b72c')
                 }
         }
         else{
-            return `Please type options by comma separated..`
+            twiml.message(`Please type options by comma separated..`)
         }
     }
     mapKeyValue(type:any){
