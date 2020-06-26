@@ -6,8 +6,9 @@ import { ReporterDetailsService } from 'src/reporter-details/reporter-details.se
 import { WaterTypeService } from 'src/water-type/water-type.service';
 import { MainWaterSourceService } from 'src/main-water-source/main-water-source.service';
 import { CultureSystemService } from 'src/culture-system/culture-system.service';
-import { ClinicalSignChoiceService } from 'src/clinical-sign-choice/clinical-sign-choice.service';
+import { ClinicalSignChoiceService } from 'src/first-clinical-sign-choice/first-clinical-sign-choice.service';
 import { SwimmingBehaviourService } from 'src/swimming-behaviour/swimming-behaviour.service';
+import { SecondClinicalSignChoiceService } from 'src/second-clinical-sign-choice/second-clinical-sign-choice.service';
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 
@@ -19,11 +20,13 @@ export class GreetingService {
                 private readonly waterTypeService: WaterTypeService,
                 private readonly mainWaterTypeService: MainWaterSourceService,
                 private readonly cultureSystemService:CultureSystemService,
-                private readonly clinicSignSystemService:ClinicalSignChoiceService,
+                private readonly firstClinicSignSystemService:ClinicalSignChoiceService,
+                private readonly secondClinicSignSystemService:SecondClinicalSignChoiceService,
                 private readonly swimmingBehaviourService: SwimmingBehaviourService){}
     async greeting(req:any, res:any){
         const whatsAppNumber = req.body.From.split("+")[1]
         let message = req.body
+        //console.log(message)
         const twiml = new MessagingResponse();
         if(fs.existsSync(`${whatsAppNumber}.json`)){
             if(message.Body === "#"){
@@ -60,8 +63,13 @@ export class GreetingService {
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                     res.end(twiml.toString());
                 }
-                else if(!userData.clinicalSignData){
-                    await this.clinicSignSystemService.clinicalSignManagement(whatsAppNumber, message, userData, twiml)
+                else if(!userData.firstClinicalSignData){
+                    await this.firstClinicSignSystemService.firstClinicalSignManagement(whatsAppNumber, message, userData, twiml)
+                    res.writeHead(200, {'Content-Type': 'text/xml'});
+                    res.end(twiml.toString());
+                }
+                else if(!userData.secondClinicalSignData){
+                    await this.secondClinicSignSystemService.secondClinicalSignManagement(whatsAppNumber, message, userData, twiml)
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                     res.end(twiml.toString());
                 }
@@ -84,7 +92,8 @@ export class GreetingService {
                                  + "\n_3)WATER-TYPE_--> "+ userData.waterTypeData 
                                  + "\n_4)MAIN-WATER-SOURCE_--> "+ userData.mainWaterSourceData
                                  + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + "."
-                                 + "\n_6)CLINICAL-SIGN_--> " + userData.clinicalSignData + "."
+                                 + "\n_6)a)FIRST-CLINICAL-SIGN-CHOICE_--> " + userData.firstClinicalSignData + "."
+                                 + "\n_6)b)SECOND-CLINICAL-SIGN-CHOICE_--> " + userData.secondClinicalSignData + "."
                                  + "\n_7)SWIMMING-BEHAVIOUR-CHOICE_--> " + userData.swimmingChoice + "." )
                     twiml.message("Please type # to restart again ")
                     res.writeHead(200, {'Content-Type': 'text/xml'});
@@ -104,7 +113,8 @@ export class GreetingService {
                                  + "\n_3)WATER-TYPE_--> "+ userData.waterTypeData 
                                  + "\n_4)MAIN-WATER-SOURCE_--> "+ userData.mainWaterSourceData
                                  + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> "+ userData.cultureSystemData + "."
-                                 + "\n_6)CLINICAL-SIGN_--> " + userData.clinicalSignData + "."
+                                 + "\n_6)a)FIRST-CLINICAL-SIGN-CHOICE_--> " + userData.firstClinicalSignData + "."
+                                 + "\n_6)b)SECOND-CLINICAL-SIGN-CHOICE_--> " + userData.secondClinicalSignData + "."
                                  + "\n_7)SWIMMING-BEHAVIOUR-CHOICE_--> " + userData.swimmingChoice + "." )
                     twiml.message("Please type # to restart again")
                     res.writeHead(200, {'Content-Type': 'text/xml'});
@@ -122,7 +132,8 @@ export class GreetingService {
                 waterTypeData:null,
                 mainWaterSourceData:null,
                 cultureSystemData:null,
-                clinicalSignData:null,
+                firstClinicalSignData:null,
+                secondClinicalSignData:null,
                 swimmingChoice: null
             }
             this.userSessionService.userSessionCreate(whatsAppNumber, defaultData)

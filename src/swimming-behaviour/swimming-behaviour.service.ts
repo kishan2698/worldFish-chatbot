@@ -13,7 +13,8 @@ export class SwimmingBehaviourService {
                 waterTypeData: userData.waterTypeData,
                 mainWaterSourceData:userData.mainWaterSourceData,
                 cultureSystemData:userData.cultureSystemData,
-                clinicalSignData:userData.clinicalSignData,
+                firstClinicalSignData:userData.firstClinicalSignData,
+                secondClinicalSignData:userData.secondClinicalSignData,
                 swimmingChoice: this.mapValue(message.Body)
             }
             await this.userSessionService.userSessionManagement(number, data)

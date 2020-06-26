@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ClinicalSignChoiceService } from './clinical-sign-choice.service';
+import { ClinicalSignChoiceService } from './first-clinical-sign-choice.service';
 
 describe('ClinicalSignChoiceService', () => {
   let service: ClinicalSignChoiceService;

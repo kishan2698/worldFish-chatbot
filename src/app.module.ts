@@ -8,12 +8,13 @@ import { ReporterDetailsService } from './reporter-details/reporter-details.serv
 import { WaterTypeService } from './water-type/water-type.service';
 import { MainWaterSourceService } from './main-water-source/main-water-source.service';
 import { CultureSystemService } from './culture-system/culture-system.service';
-import { ClinicalSignChoiceService } from './clinical-sign-choice/clinical-sign-choice.service';
+import { ClinicalSignChoiceService } from './first-clinical-sign-choice/first-clinical-sign-choice.service';
 import { SwimmingBehaviourService } from './swimming-behaviour/swimming-behaviour.service';
+import { SecondClinicalSignChoiceService } from './second-clinical-sign-choice/second-clinical-sign-choice.service';
 
 @Module({
   imports: [],
   controllers: [AppController],
-  providers: [AppService, GreetingService, UserSessionService, GpsLocationService, ReporterDetailsService, WaterTypeService, MainWaterSourceService, CultureSystemService, ClinicalSignChoiceService, SwimmingBehaviourService],
+  providers: [AppService, GreetingService, UserSessionService, GpsLocationService, ReporterDetailsService, WaterTypeService, MainWaterSourceService, CultureSystemService, ClinicalSignChoiceService, SwimmingBehaviourService, SecondClinicalSignChoiceService],
 })
 export class AppModule {}

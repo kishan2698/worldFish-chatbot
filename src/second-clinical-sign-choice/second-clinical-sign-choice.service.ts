@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { UserSessionService } from 'src/user-session/user-session.service';
 
 @Injectable()
-export class ClinicalSignChoiceService {
+export class SecondClinicalSignChoiceService {
     constructor(private readonly userSessionService:UserSessionService){}
-    async clinicalSignManagement(number:string, message:any,userData:any, twiml:any){
-        let regex = /[1-12]+(,[1-12]+)+/
+    async secondClinicalSignManagement(number:string, message:any,userData:any, twiml:any){
+        let regex =/^[1-9][0-9]?(,([1-9][0-9]?)+)+/
         if(regex.test(message.Body)){
-            if(!userData.clinicalSignData){
+            if(!userData.secondClinicalSignData){
                 let data:any = {
                     locationChoice:userData.locationChoice,
                     locationData:userData.locationData,
@@ -15,7 +15,8 @@ export class ClinicalSignChoiceService {
                     waterTypeData: userData.waterTypeData,
                     mainWaterSourceData:userData.mainWaterSourceData,
                     cultureSystemData:userData.cultureSystemData,
-                    clinicalSignData:this.mapKeyValue(message.Body),
+                    firstClinicalSignData:userData.firstClinicalSignData,
+                    secondClinicalSignData:this.mapKeyValue(message.Body),
                     swimmingChoice:null
                 }
                 await this.userSessionService.userSessionManagement(number, data)
@@ -29,17 +30,11 @@ export class ClinicalSignChoiceService {
         else{
             twiml.message(`Please type options by comma separated..`)
         }
-    }
+}
     mapKeyValue(type:any){
         let message = type.split(",")
         let result = []
-        let clinicSignSource:object = {
-            '1':'Eye exophthalmia/popeye',
-            '2':'Eye endothalmia/eye shrinkage',
-            '3':'Eye opacification',
-            '4':'erosions haemorrhagic lesion',
-            '5':'Skin discoloration',
-            '6':'Open wounds',
+        let secondClinicSignSource:object = {
             '7':'Abdominal distension/swelling',
             '8':'Scale protrusion/detachment',
             '9':'Gill paleness/anemia',
@@ -48,7 +43,7 @@ export class ClinicalSignChoiceService {
             '12':'Swollen anus',
         }
         message.forEach(element => {
-            result.push(clinicSignSource[element])
+            result.push(secondClinicSignSource[element])
         });
         return result
     }
