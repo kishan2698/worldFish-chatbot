@@ -30,7 +30,7 @@ export class ClinicalSignChoiceService {
                 }
         }
         else{
-            twiml.message(`Please type options by comma separated..`)
+            twiml.message(`Please type options by comma separated between 1 to 6`)
         }
     }
     mapKeyValue(type:any){

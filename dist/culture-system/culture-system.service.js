@@ -43,7 +43,7 @@ let CultureSystemService = class CultureSystemService {
             }
         }
         else {
-            twiml.message(`Please type options by comma separated..`);
+            twiml.message(`Please type options by comma separated between 1 to 4`);
         }
     }
     mapKeyValue(type) {

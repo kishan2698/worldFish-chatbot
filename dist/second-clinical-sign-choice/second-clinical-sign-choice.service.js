@@ -17,30 +17,36 @@ let SecondClinicalSignChoiceService = class SecondClinicalSignChoiceService {
         this.userSessionService = userSessionService;
     }
     async secondClinicalSignManagement(number, message, userData, twiml) {
-        let regex = /^(7|1[0-2](,(7|1[0-2])*)*)$/;
+        let regex = /^[0-9](,[0-9])*$/;
         if (regex.test(message.Body)) {
-            if (!userData.secondClinicalSignData) {
-                let data = {
-                    locationChoice: userData.locationChoice,
-                    locationData: userData.locationData,
-                    reporterData: userData.reporterData,
-                    waterTypeData: userData.waterTypeData,
-                    mainWaterSourceData: userData.mainWaterSourceData,
-                    cultureSystemData: userData.cultureSystemData,
-                    firstClinicalSignData: userData.firstClinicalSignData,
-                    secondClinicalSignData: this.mapKeyValue(message.Body),
-                    swimmingChoice: null
-                };
-                await this.userSessionService.userSessionManagement(number, data);
-                twiml.message(`Swimming behavior: 
-                        \nDo your fish show the following behavior (shown in video below, please watch and type options)?
-                        \n Please type 1 for yes
-                        \n Please type 2 for no`);
-                twiml.message().media('https://api.twilio.com/2010-04-01/Accounts/AC01b5311740cfa96b328bbed8b727b387/Messages/MMe0fb12eea3b6f62733b3d676032dfb68/Media/ME1b6277016d87cca275ca078d7c66b72c');
+            if (!this.checkBetweenData(message.Body)) {
+                twiml.message(`Please type options by comma separated between 7 to 12`);
+            }
+            else {
+                if (!userData.secondClinicalSignData) {
+                    let data = {
+                        locationChoice: userData.locationChoice,
+                        locationData: userData.locationData,
+                        reporterData: userData.reporterData,
+                        waterTypeData: userData.waterTypeData,
+                        mainWaterSourceData: userData.mainWaterSourceData,
+                        cultureSystemData: userData.cultureSystemData,
+                        firstClinicalSignData: userData.firstClinicalSignData,
+                        secondClinicalSignData: this.mapKeyValue(message.Body),
+                        swimmingChoice: null
+                    };
+                    await this.userSessionService.userSessionManagement(number, data);
+                    twiml.message(`Swimming behavior: 
+                            \nDo your fish show the following behavior (shown in video below, please watch and type options)?
+                            \n Please type 1 for yes
+                            \n Please type 2 for no`);
+                    twiml.message().media('https://api.twilio.com/2010-04-01/Accounts/AC01b5311740cfa96b328bbed8b727b387/Messages/MMe0fb12eea3b6f62733b3d676032dfb68/Media/ME1b6277016d87cca275ca078d7c66b72c');
+                }
             }
         }
         else {
-            twiml.message(`Please type options by comma separated..`);
+            console.log("else");
+            twiml.message(`Please type options by comma separated between 7 to 12`);
         }
     }
     mapKeyValue(type) {
@@ -58,6 +64,24 @@ let SecondClinicalSignChoiceService = class SecondClinicalSignChoiceService {
             result.push(secondClinicSignSource[element]);
         });
         return result;
+    }
+    checkBetweenData(data) {
+        const response = data.split(',');
+        const boolRes = [];
+        response.forEach(element => {
+            if (element >= 7 && element <= 12) {
+                boolRes.push(true);
+            }
+            else {
+                boolRes.push(false);
+            }
+        });
+        if (boolRes.includes(false)) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 };
 SecondClinicalSignChoiceService = __decorate([

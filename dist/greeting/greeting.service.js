@@ -41,7 +41,7 @@ let GreetingService = class GreetingService {
         if (fs.existsSync(`${whatsAppNumber}.json`)) {
             if (message.Body === "#") {
                 this.userSessionService.userSessionDelete(whatsAppNumber);
-                twiml.message("Your data has been removed.\nPlease type anything to start conversation again.");
+                twiml.message("Your data has been removed.\nPlease type _*hi*_ to start conversation again.");
                 res.writeHead(200, { 'Content-Type': 'text/xml' });
                 res.end(twiml.toString());
             }
@@ -93,43 +93,50 @@ let GreetingService = class GreetingService {
                     res.end(twiml.toString());
                 }
                 else {
-                    if (userData.locationData.latitude) {
-                        twiml.message("*_USER-DATA_*: "
-                            + "\n_1)GPS-LOCATION-DATA_--> "
-                            + "\n*LATITUDE*: " + JSON.parse(JSON.stringify(userData.locationData.latitude))
-                            + "\n*LONGITUDE*: " + JSON.parse(JSON.stringify(userData.locationData.longitude))
-                            + "\n_2)DETAILS-OF-REPORTER_--> "
-                            + "\n*REPORTER-NAME*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterName))
-                            + "\n*REPORTER-MOBILE NUMBER*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterMobile))
-                            + "\n*REPORTER-EMAIL*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterEmail))
-                            + "\n_3)WATER-TYPE_--> " + userData.waterTypeData
-                            + "\n_4)MAIN-WATER-SOURCE_--> " + userData.mainWaterSourceData
-                            + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> " + userData.cultureSystemData + "."
-                            + "\n_6)a)FIRST-CLINICAL-SIGN-CHOICE_--> " + userData.firstClinicalSignData + "."
-                            + "\n_6)b)SECOND-CLINICAL-SIGN-CHOICE_--> " + userData.secondClinicalSignData + "."
-                            + "\n_7)SWIMMING-BEHAVIOUR-CHOICE_--> " + userData.swimmingChoice + ".");
-                        twiml.message("Please type # to restart again ");
-                        res.writeHead(200, { 'Content-Type': 'text/xml' });
-                        res.end(twiml.toString());
+                    if (message.body.toLowerCase() === "ok") {
+                        if (userData.locationData.latitude) {
+                            twiml.message("*_USER-DATA_*: "
+                                + "\n_1)GPS-LOCATION-DATA_--> "
+                                + "\n*LATITUDE*: " + JSON.parse(JSON.stringify(userData.locationData.latitude))
+                                + "\n*LONGITUDE*: " + JSON.parse(JSON.stringify(userData.locationData.longitude))
+                                + "\n_2)DETAILS-OF-REPORTER_--> "
+                                + "\n*REPORTER-NAME*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterName))
+                                + "\n*REPORTER-MOBILE NUMBER*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterMobile))
+                                + "\n*REPORTER-EMAIL*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterEmail))
+                                + "\n_3)WATER-TYPE_--> " + userData.waterTypeData
+                                + "\n_4)MAIN-WATER-SOURCE_--> " + userData.mainWaterSourceData
+                                + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> " + userData.cultureSystemData + "."
+                                + "\n_6)a)FIRST-CLINICAL-SIGN-CHOICE_--> " + userData.firstClinicalSignData + "."
+                                + "\n_6)b)SECOND-CLINICAL-SIGN-CHOICE_--> " + userData.secondClinicalSignData + "."
+                                + "\n_7)SWIMMING-BEHAVIOUR-CHOICE_--> " + userData.swimmingChoice + ".");
+                            twiml.message("Please type # to restart again ");
+                            res.writeHead(200, { 'Content-Type': 'text/xml' });
+                            res.end(twiml.toString());
+                        }
+                        else {
+                            twiml.message("*_USER-DATA_*: "
+                                + "\n_1)GPS-LOCATION-DATA_--> "
+                                + "\n*VILLAGE-NAME*: " + JSON.parse(JSON.stringify(userData.locationData.villageName))
+                                + "\n*DISTRICT-NAME*: " + JSON.parse(JSON.stringify(userData.locationData.districtName))
+                                + "\n*STATE-NAME*: " + JSON.parse(JSON.stringify(userData.locationData.stateName))
+                                + "\n*COUNTRY-NAME*: " + JSON.parse(JSON.stringify(userData.locationData.countryName))
+                                + "\n_2)DETAILS-OF-REPORTER_--> "
+                                + "\n*REPORTER-NAME*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterName))
+                                + "\n*REPORTER-MOBILE NUMBER*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterMobile))
+                                + "\n*REPORTER-EMAIL*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterEmail))
+                                + "\n_3)WATER-TYPE_--> " + userData.waterTypeData
+                                + "\n_4)MAIN-WATER-SOURCE_--> " + userData.mainWaterSourceData
+                                + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> " + userData.cultureSystemData + "."
+                                + "\n_6)a)FIRST-CLINICAL-SIGN-CHOICE_--> " + userData.firstClinicalSignData + "."
+                                + "\n_6)b)SECOND-CLINICAL-SIGN-CHOICE_--> " + userData.secondClinicalSignData + "."
+                                + "\n_7)SWIMMING-BEHAVIOUR-CHOICE_--> " + userData.swimmingChoice + ".");
+                            twiml.message("Please type # to restart again");
+                            res.writeHead(200, { 'Content-Type': 'text/xml' });
+                            res.end(twiml.toString());
+                        }
                     }
                     else {
-                        twiml.message("*_USER-DATA_*: "
-                            + "\n_1)GPS-LOCATION-DATA_--> "
-                            + "\n*VILLAGE-NAME*: " + JSON.parse(JSON.stringify(userData.locationData.villageName))
-                            + "\n*DISTRICT-NAME*: " + JSON.parse(JSON.stringify(userData.locationData.districtName))
-                            + "\n*STATE-NAME*: " + JSON.parse(JSON.stringify(userData.locationData.stateName))
-                            + "\n*COUNTRY-NAME*: " + JSON.parse(JSON.stringify(userData.locationData.countryName))
-                            + "\n_2)DETAILS-OF-REPORTER_--> "
-                            + "\n*REPORTER-NAME*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterName))
-                            + "\n*REPORTER-MOBILE NUMBER*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterMobile))
-                            + "\n*REPORTER-EMAIL*: " + JSON.parse(JSON.stringify(userData.reporterData.reporterEmail))
-                            + "\n_3)WATER-TYPE_--> " + userData.waterTypeData
-                            + "\n_4)MAIN-WATER-SOURCE_--> " + userData.mainWaterSourceData
-                            + "\n_5)DESCRIPTION-OF-CULTURE-SYSTEM_--> " + userData.cultureSystemData + "."
-                            + "\n_6)a)FIRST-CLINICAL-SIGN-CHOICE_--> " + userData.firstClinicalSignData + "."
-                            + "\n_6)b)SECOND-CLINICAL-SIGN-CHOICE_--> " + userData.secondClinicalSignData + "."
-                            + "\n_7)SWIMMING-BEHAVIOUR-CHOICE_--> " + userData.swimmingChoice + ".");
-                        twiml.message("Please type # to restart again");
+                        twiml.message("Please type _*ok*_");
                         res.writeHead(200, { 'Content-Type': 'text/xml' });
                         res.end(twiml.toString());
                     }

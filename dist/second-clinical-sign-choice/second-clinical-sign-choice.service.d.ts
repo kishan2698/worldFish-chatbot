@@ -4,4 +4,5 @@ export declare class SecondClinicalSignChoiceService {
     constructor(userSessionService: UserSessionService);
     secondClinicalSignManagement(number: string, message: any, userData: any, twiml: any): Promise<void>;
     mapKeyValue(type: any): any[];
+    checkBetweenData(data: any): boolean;
 }

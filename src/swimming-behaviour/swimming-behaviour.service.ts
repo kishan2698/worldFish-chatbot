@@ -21,7 +21,7 @@ export class SwimmingBehaviourService {
                     }
                     await this.userSessionService.userSessionManagement(number, data)
                     return `Thanks for your information
-                            \nPlease type anything for your data..`
+                            \nPlease type _*ok*_ for your data..`
                 default:
                     return `Please Type 1 or 2
                     \nYou can type _*#*_ any time for start the conversation from beginning(It will erase all your data)`

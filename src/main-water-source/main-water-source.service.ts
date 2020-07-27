@@ -26,7 +26,7 @@ export class MainWaterSourceService {
             }
         }
         else{
-            return `Please type options by comma separated`
+            return `Please type options by comma separated between 1 to 6`
         }
     }
     mapKeyValue(type:any){
