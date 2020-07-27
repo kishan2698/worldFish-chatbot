@@ -1142,7 +1142,7 @@
         "affectsGlobalScope": false
       },
       "../src/gps-location/gps-location.service.ts": {
-        "version": "5d156990d2cc811b8888402ccdd9360ab6a10ac8f52863a0409a746050d92ab3",
+        "version": "d59007e534cba334437c3dae30bdb291468ecb3dd96c61c5ca3b336072a2f691",
         "signature": "38a61c561d7ac6f6cedea6a2286bdc53cab648fbb663f43bf5159d0b57ed89d2",
         "affectsGlobalScope": false
       },

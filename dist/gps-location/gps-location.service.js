@@ -19,12 +19,14 @@ let GpsLocationService = class GpsLocationService {
     }
     async locationManagement(number, userData, message) {
         if (!userData.locationChoice) {
-            let data = {
-                locationChoice: message.Body,
-                locationData: null,
-            };
-            await this.userSessionService.fsPromiseManagement(number, data);
-            userData = JSON.parse(fs.readFileSync(`${number}.json`, 'utf8'));
+            if (message.Body === "1" || message.Body === "2") {
+                let data = {
+                    locationChoice: message.Body,
+                    locationData: null,
+                };
+                await this.userSessionService.fsPromiseManagement(number, data);
+                userData = JSON.parse(fs.readFileSync(`${number}.json`, 'utf8'));
+            }
         }
         switch (userData.locationChoice) {
             case "1":

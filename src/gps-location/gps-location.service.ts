@@ -7,12 +7,14 @@ export class GpsLocationService {
     constructor(private readonly userSessionService:UserSessionService){}
     async locationManagement(number: string, userData:any, message: any ):Promise<String>{
         if(!userData.locationChoice){
-            let data:any = {
-                locationChoice:message.Body,
-                locationData:null,
+            if(message.Body === "1" || message.Body === "2"){
+                let data:any = {
+                    locationChoice:message.Body,
+                    locationData:null,
+                }
+                await this.userSessionService.fsPromiseManagement(number, data)
+                userData = JSON.parse(fs.readFileSync(`${number}.json`, 'utf8'));
             }
-            await this.userSessionService.fsPromiseManagement(number, data)
-            userData = JSON.parse(fs.readFileSync(`${number}.json`, 'utf8'));
         }
         switch(userData.locationChoice){
             case "1":
