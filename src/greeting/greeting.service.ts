@@ -31,6 +31,9 @@ export class GreetingService {
         if(fs.existsSync(`${whatsAppNumber}.json`)){
             if(message.Body === "#"){
                 this.userSessionService.userSessionDelete(whatsAppNumber)
+                twiml.message("Your data has been removed.\nPlease type anything to start conversation again.")
+                res.writeHead(200, {'Content-Type': 'text/xml'});
+                res.end(twiml.toString());
             }
             else{
                 let userData = JSON.parse(fs.readFileSync(`${whatsAppNumber}.json`, 'utf8'));

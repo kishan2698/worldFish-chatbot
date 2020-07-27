@@ -5,7 +5,7 @@ import { UserSessionService } from 'src/user-session/user-session.service';
 export class ClinicalSignChoiceService {
     constructor(private readonly userSessionService:UserSessionService){}
     async firstClinicalSignManagement(number:string, message:any,userData:any, twiml:any){
-        let regex = /[1-6]+(,[1-6]+)+/
+        let regex = /^[1-6](,[1-6])*$/
         if(regex.test(message.Body)){
             if(!userData.firstClinicalSignData){
                 let data:any = {

@@ -6,20 +6,26 @@ export class SwimmingBehaviourService {
     constructor(private readonly userSessionService:UserSessionService){}
     async swimmingBehaviourManagement(number:string, message:any,userData:any){
         if(!userData.swimmingChoice){
-            let data:any = {
-                locationChoice:userData.locationChoice,
-                locationData:userData.locationData,
-                reporterData:userData.reporterData,
-                waterTypeData: userData.waterTypeData,
-                mainWaterSourceData:userData.mainWaterSourceData,
-                cultureSystemData:userData.cultureSystemData,
-                firstClinicalSignData:userData.firstClinicalSignData,
-                secondClinicalSignData:userData.secondClinicalSignData,
-                swimmingChoice: this.mapValue(message.Body)
+            switch(message.Body){
+                case "1":case "2":
+                    let data:any = {
+                        locationChoice:userData.locationChoice,
+                        locationData:userData.locationData,
+                        reporterData:userData.reporterData,
+                        waterTypeData: userData.waterTypeData,
+                        mainWaterSourceData:userData.mainWaterSourceData,
+                        cultureSystemData:userData.cultureSystemData,
+                        firstClinicalSignData:userData.firstClinicalSignData,
+                        secondClinicalSignData:userData.secondClinicalSignData,
+                        swimmingChoice: this.mapValue(message.Body)
+                    }
+                    await this.userSessionService.userSessionManagement(number, data)
+                    return `Thanks for your information
+                            \nPlease type anything for your data..`
+                default:
+                    return `Please Type 1 or 2
+                    \nYou can type _*#*_ any time for start the conversation from beginning(It will erase all your data)`
             }
-            await this.userSessionService.userSessionManagement(number, data)
-            return `Thanks for your informtion
-                    \nPlease type ok for your data..`
         }
     }
 

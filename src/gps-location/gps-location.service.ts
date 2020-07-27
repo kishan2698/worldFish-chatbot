@@ -83,8 +83,8 @@ export class GpsLocationService {
                         \nPlease Enter Your Name`
             }
             default:
-                this.userSessionService.contactSessionManagement(number, null, null)
-                return `PLEASE TYPE ANYTHING `
+                // this.userSessionService.contactSessionManagement(number, null, null)
+                return `Please type _*1*_ or _*2*_\nYou can type _*#*_ any time for start the conversation from beginning(It will erase all your data)`
         }
     }
 }

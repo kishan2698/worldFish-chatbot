@@ -25,8 +25,9 @@ export class WaterTypeService {
                             \n5)Surrounding Seawater or Brackish Water
                             \n6)Rain Water`
             default:
-                this.userSessionService.contactSessionManagement(number, null, null)
-                return `PLEASE TYPE 1,2 or 3`
+                // this.userSessionService.contactSessionManagement(number, null, null)
+                return `Please Type 1 or 2 or 3
+                \nYou can type _*#*_ any time for start the conversation from beginning(It will erase all your data)`
         }
     }
     mapValue(type:any){

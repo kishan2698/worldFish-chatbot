@@ -17,7 +17,7 @@ let SecondClinicalSignChoiceService = class SecondClinicalSignChoiceService {
         this.userSessionService = userSessionService;
     }
     async secondClinicalSignManagement(number, message, userData, twiml) {
-        let regex = /^[1-9][0-9]?(,([1-9][0-9]?)+)+/;
+        let regex = /^(7|1[0-2](,(7|1[0-2])*)*)$/;
         if (regex.test(message.Body)) {
             if (!userData.secondClinicalSignData) {
                 let data = {

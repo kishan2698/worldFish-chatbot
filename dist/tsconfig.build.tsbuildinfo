@@ -1142,22 +1142,22 @@
         "affectsGlobalScope": false
       },
       "../src/gps-location/gps-location.service.ts": {
-        "version": "35bf8da72a16e831d3bb85c031414daa30a72f5a6919206c8456c1713ec0fc78",
+        "version": "5d156990d2cc811b8888402ccdd9360ab6a10ac8f52863a0409a746050d92ab3",
         "signature": "38a61c561d7ac6f6cedea6a2286bdc53cab648fbb663f43bf5159d0b57ed89d2",
         "affectsGlobalScope": false
       },
       "../src/reporter-details/reporter-details.service.ts": {
-        "version": "d6863f90a7511981dd7945a67135297aa2ba6d83adec21baca46e4e318d6c03a",
+        "version": "4ea634fdf5fd2cbbb63af9c1331e7bc8c4c18051a220f67f183054fab5850189",
         "signature": "c74b12aebd68321a04a7426cc93f847e8883c255bfe4af80ade706e7728456ee",
         "affectsGlobalScope": false
       },
       "../src/water-type/water-type.service.ts": {
-        "version": "cc78ad2225e7255c76fdd5d0e68ad436e856419808e058f5f1e11867dfbbf88a",
+        "version": "e3a7f4843941b2f03d02677c5b37b1c1737f901265d20bc49a6403e3a13edfb8",
         "signature": "ad2dd4933c84e148088ac74ac2267e36d46b5c459d58f86ccc739a345b886451",
         "affectsGlobalScope": false
       },
       "../src/main-water-source/main-water-source.service.ts": {
-        "version": "0e6ae6dab210982100519e3bf39488c85cab1defbd462cdc0855286ac9fcff5c",
+        "version": "033941ec5ad8a37907573c685cea6cb7100f9d90d423971d6fdb8a45e31c065a",
         "signature": "0e9cbaa17053920d7f012ae938feaea02507d01364e9a558f0e63f6c72a4bb9b",
         "affectsGlobalScope": false
       },
@@ -1167,22 +1167,22 @@
         "affectsGlobalScope": false
       },
       "../src/first-clinical-sign-choice/first-clinical-sign-choice.service.ts": {
-        "version": "6d390fb2142cfdcceebc6f894b9edc4ad7373a43c71aa46b0ff320c1f6bed25e",
+        "version": "565b08a04f657bde96a2f525207cd51d4a8d9d2747ea178321bf2f67e953bd52",
         "signature": "2d9d4811abc445a5f3b4b6a43050b5f17e26a5f85616f591939b9dd16b8c39b9",
         "affectsGlobalScope": false
       },
       "../src/swimming-behaviour/swimming-behaviour.service.ts": {
-        "version": "21884fb04d4997aef688f21d5acb6cbaa704f25308630138fdbe15acefa97671",
-        "signature": "529c7fbe8873475389e7be394a56bc50fae05c2a9b43bf6444306054ae74b366",
+        "version": "2ff7ed83f5984696954ce86bad9c0f18a4b3dfdf688186040a6b7b226ae2190e",
+        "signature": "fa6acfdd91d2d3bbf5b01f733b28d84bba8f7527af1165ab49f8c3647c181ded",
         "affectsGlobalScope": false
       },
       "../src/second-clinical-sign-choice/second-clinical-sign-choice.service.ts": {
-        "version": "aa7c8041b4bae48a2a9d5b8d1405ba069c9ff20884df8ba291ad2cc356fc1d0b",
+        "version": "b3e922daa26e3a307f68f7ec8c51996242a2863cfc7eced7e3c9ec41002f1fd3",
         "signature": "5c547fe4b99c6fd31c8faa02240bbfd902818100dda91daa09c51ac5918b7a70",
         "affectsGlobalScope": false
       },
       "../src/greeting/greeting.service.ts": {
-        "version": "e23a610ea3b94c3e62ebd9abfa59e084005ea9c66930c4d36e112658a47c4968",
+        "version": "7e987643b85d6bf21993ad39d7fa5f9bb32d7b76c6888835fd9e1961a9d0bb37",
         "signature": "82bf77255f332d31b32049f1f2ef3bde23b5d5d99677ffd2d6411e2a9604d35f",
         "affectsGlobalScope": false
       },
@@ -1477,17 +1477,17 @@
         "affectsGlobalScope": false
       },
       "../src/app.controller.ts": {
-        "version": "ed9d5d87be685e67bd88260c217114a04e0602c8919554cdd3c5c1318b663aa2",
+        "version": "07386440a037a9b2823376574be49dcdd803de6980350ad6ace28bf793a2a105",
         "signature": "8abee75bbdbf028ca429cb9a1509dfa604a989d338ce269a12d295d3d69cdf8c",
         "affectsGlobalScope": false
       },
       "../src/app.service.ts": {
-        "version": "eaf8514ce110fa428a93a27408df4d06d133dbd9ed0a775c315ddfdd507853a9",
+        "version": "5d4242d50092a353e5ab1f06663a89dbc714c7d9d70072ea03c83c5b14750f05",
         "signature": "d8f4cb0109c1b399d657807fd6af504d74a9300325e0fc915abdbf658b464a97",
         "affectsGlobalScope": false
       },
       "../src/app.module.ts": {
-        "version": "0738040770e0699d9338d5f36ef5b4dbfa02a69c9833755fa752ecd115768f6d",
+        "version": "8a8541d7967516929751c2a27e397721e49b85efaacedc6ca82ab14bbb16664d",
         "signature": "9fc7f7b6ad854404973b8cba8e6d883f758237991968e9a3965d716d46f1da88",
         "affectsGlobalScope": false
       },
@@ -1672,7 +1672,7 @@
         "affectsGlobalScope": false
       },
       "../src/main.ts": {
-        "version": "cc2b31bb7c1a729e9c77efa8eb052d92670f5ff817f8b0890b2ea324d5cffdba",
+        "version": "3c8967198a459fe0868276c735fb4ecbe75c3ed2bbda02d4dcee787c5c448528",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },

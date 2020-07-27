@@ -28,28 +28,40 @@ let ReporterDetailsService = class ReporterDetailsService {
             return `Please Enter Your Mobile Number`;
         }
         else if (!userData.reporterMobile) {
-            let data = {
-                locationChoice: userData.locationChoice,
-                locationData: userData.locationData,
-                reporterName: userData.reporterName,
-                reporterMobile: message.Body,
-                reporterEmail: null
-            };
-            this.userSessionService.userSessionManagement(number, data);
-            return `Please Enter Your Valid Email`;
+            let phoneNoRegx = /^\d{10}$/;
+            if (!(phoneNoRegx.test(message.Body))) {
+                return `Please enter a valid mobile number`;
+            }
+            else {
+                let data = {
+                    locationChoice: userData.locationChoice,
+                    locationData: userData.locationData,
+                    reporterName: userData.reporterName,
+                    reporterMobile: message.Body,
+                    reporterEmail: null
+                };
+                this.userSessionService.userSessionManagement(number, data);
+                return `Please Enter Your Email`;
+            }
         }
         else if (!userData.reporterEmail) {
-            let data = {
-                locationChoice: userData.locationChoice,
-                locationData: userData.locationData,
-                reporterData: { reporterName: userData.reporterName, reporterMobile: userData.reporterMobile, reporterEmail: message.Body },
-                waterTypeChoice: null
-            };
-            this.userSessionService.userSessionManagement(number, data);
-            return `Please Share Water Type:
-                    \nPlease Type 1 for Sea Water
-                    \nPlease Type 2 for Fresh Water
-                    \nPlease Type 3 for Brackish Water`;
+            const emailRegx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!(emailRegx.test(message.Body))) {
+                return `Please enter a valid email format`;
+            }
+            else {
+                let data = {
+                    locationChoice: userData.locationChoice,
+                    locationData: userData.locationData,
+                    reporterData: { reporterName: userData.reporterName, reporterMobile: userData.reporterMobile, reporterEmail: message.Body },
+                    waterTypeChoice: null
+                };
+                this.userSessionService.userSessionManagement(number, data);
+                return `Please Share Water Type:
+                        \nPlease Type _*1*_ for Sea Water
+                        \nPlease Type _*2*_ for Fresh Water
+                        \nPlease Type _*3*_ for Brackish Water`;
+            }
         }
     }
 };

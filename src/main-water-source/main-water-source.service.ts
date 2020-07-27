@@ -9,25 +9,25 @@ export class MainWaterSourceService {
         if(regex.test(message.Body)){
             if(!userData.mainWaterSourceData){
                 let data:any = {
-                locationChoice:userData.locationChoice,
-                locationData:userData.locationData,
-                reporterData:userData.reporterData,
-                waterTypeData: userData.waterTypeData,
-                mainWaterSourceData:this.mapKeyValue(message.Body),
-                cultureSystemData:null
+                    locationChoice:userData.locationChoice,
+                    locationData:userData.locationData,
+                    reporterData:userData.reporterData,
+                    waterTypeData: userData.waterTypeData,
+                    mainWaterSourceData:this.mapKeyValue(message.Body),
+                    cultureSystemData:null
+                }
+                this.userSessionService.userSessionManagement(number, data)
+                return `Description of culture system:
+                        \nPlease type the options by giving comma separated(eg:1,2,3,4):
+                        \n1)Pond
+                        \n2)Tank
+                        \n3)Cage
+                        \n4)Raceway`
             }
-            this.userSessionService.userSessionManagement(number, data)
-            return `Description of culture system:
-                    \nPlease type the options by giving comma separated(eg:1,2,3,4):
-                    \n1)Pond
-                    \n2)Tank
-                    \n3)Cage
-                    \n4)Raceway`
         }
-    }
-    else{
-        return `Please type options by comma separated`
-    }
+        else{
+            return `Please type options by comma separated`
+        }
     }
     mapKeyValue(type:any){
         let message = type.split(",")
