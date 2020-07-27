@@ -5,7 +5,7 @@ import { UserSessionService } from 'src/user-session/user-session.service';
 export class SecondClinicalSignChoiceService {
     constructor(private readonly userSessionService:UserSessionService){}
     async secondClinicalSignManagement(number:string, message:any,userData:any, twiml:any){
-        let regex = /^[0-9](,[0-9])*$/
+        let regex = /^\d(\d)*(,\d(\d)*)*$/
         ///^([7-9]|1[0-2]+(,([7-9]|1[0-2])*)*)$/
         if(regex.test(message.Body)){
             if(!this.checkBetweenData(message.Body)){

@@ -1177,12 +1177,12 @@
         "affectsGlobalScope": false
       },
       "../src/second-clinical-sign-choice/second-clinical-sign-choice.service.ts": {
-        "version": "c88adc15c251c1f4bf8fd6dac8a77738bbabe43c6831f4f27260921e9bad6eaa",
+        "version": "eae3396510f0f928ce8abad5c77c68a66b4b0c0ae685b4ab5b0436ff068a0b70",
         "signature": "de195ddc0d791a8d930663e7a872f5dd4937a1eb76f233c2856fef71696c4387",
         "affectsGlobalScope": false
       },
       "../src/greeting/greeting.service.ts": {
-        "version": "9712390f96777d3c19739be0a48b55a3be1856ee9e54423014c9d830f48e03bb",
+        "version": "3f9957c169f1254493499776107269d6a492925483851de940e7ea27df31c0b0",
         "signature": "82bf77255f332d31b32049f1f2ef3bde23b5d5d99677ffd2d6411e2a9604d35f",
         "affectsGlobalScope": false
       },

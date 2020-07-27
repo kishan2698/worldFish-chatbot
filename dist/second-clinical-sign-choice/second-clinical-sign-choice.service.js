@@ -17,7 +17,7 @@ let SecondClinicalSignChoiceService = class SecondClinicalSignChoiceService {
         this.userSessionService = userSessionService;
     }
     async secondClinicalSignManagement(number, message, userData, twiml) {
-        let regex = /^[0-9](,[0-9])*$/;
+        let regex = /^\d(\d)*(,\d(\d)*)*$/;
         if (regex.test(message.Body)) {
             if (!this.checkBetweenData(message.Body)) {
                 twiml.message(`Please type options by comma separated between 7 to 12`);

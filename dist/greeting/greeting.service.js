@@ -93,7 +93,7 @@ let GreetingService = class GreetingService {
                     res.end(twiml.toString());
                 }
                 else {
-                    if (message.body.toLowerCase() === "ok") {
+                    if (message.Body.toLowerCase() === "ok") {
                         if (userData.locationData.latitude) {
                             twiml.message("*_USER-DATA_*: "
                                 + "\n_1)GPS-LOCATION-DATA_--> "
